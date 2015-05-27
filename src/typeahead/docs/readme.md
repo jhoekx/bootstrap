@@ -55,3 +55,7 @@ The typeahead directives provide several attributes:
 * `typeahead-focus-first`
    _(Defaults: true)_ :
    Should the first match automatically be focused as you type?
+
+* `typeahead-show-after-blur`
+   _(Defaults: false)_ :
+   Should the popup appear even after the element loses focus?

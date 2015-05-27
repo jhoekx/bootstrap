@@ -61,6 +61,8 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
 
       var focusFirst = originalScope.$eval(attrs.typeaheadFocusFirst) !== false;
 
+      var showAfterBlur = attrs.typeaheadShowAfterBlur ? originalScope.$eval(attrs.typeaheadShowAfterBlur) : false;
+
       //INTERNAL VARIABLES
 
       //model setter executed upon match selection
@@ -310,9 +312,11 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
         }
       });
 
-      element.bind('blur', function (evt) {
-        hasFocus = false;
-      });
+      if (showAfterBlur === false) {
+        element.bind('blur', function (evt) {
+          hasFocus = false;
+        });
+      }
 
       // Keep reference to click handler to unbind it.
       var dismissClickHandler = function (evt) {

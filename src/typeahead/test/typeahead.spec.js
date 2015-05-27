@@ -579,6 +579,25 @@ describe('typeahead tests', function () {
       expect(element).toBeClosed();
     });
 
+    it('should show the popup after blur if show-after-blur is enabled', function () {
+
+      $scope.items = function(viewValue) {
+        return $timeout(function(){
+          return [viewValue];
+        });
+      };
+      var element = prepareInputEl('<div><input ng-model="result" typeahead="item for item in items($viewValue)" typeahead-show-after-blur="true"></div>');
+      var inputEl = findInput(element);
+
+      changeInputValueTo(element, 'match');
+      $scope.$digest();
+
+      inputEl.blur();
+      $timeout.flush();
+
+      expect(element).not.toBeClosed();
+    });
+
     it('should properly update loading callback if an element is not focused', function () {
 
       $scope.items = function(viewValue) {
